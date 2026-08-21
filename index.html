@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>roShaN OS v1.01</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- BOOT SCREEN -->
+  <div id="boot-screen" class="screen active">
+    <div class="boot-content">
+      <div class="gears">
+        <div class="gear gear-1">⚙</div>
+        <div class="gear gear-2">⚙</div>
+        <div class="gear gear-3">⚙</div>
+      </div>
+      <div class="lightbulb">💡</div>
+      <h1 class="os-title">roShaN OS</h1>
+      <p class="os-tagline">designed for innovative minds</p>
+      <p class="version">v1.01</p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <p class="boot-status">booting creativity...</p>
+      <p class="skip-hint">press any key to skip</p>
+    </div>
+  </div>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" class="screen">
+    <div class="login-box">
+      <h2>what should we call you, creator?</h2>
+      <input type="text" id="username-input" placeholder="enter your name..." maxlength="15">
+      <button id="login-btn">enter os →</button>
+    </div>
+    <div class="floating-gadgets">
+      <span>🤖</span><span>🚀</span><span>⚙</span><span>💡</span>
+      <span>🎮</span><span>🔧</span><span>🛸</span><span>⭐</span>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <div id="desktop" class="screen">
+    <!-- welcome popup -->
+    <div id="welcome-popup" class="popup">
+      <h3>welcome, <span id="welcome-name">Innovator</span>! 🎉</h3>
+      <p>roShaN OS is ready. start creating.</p>
+      <button onclick="document.getElementById('welcome-popup').style.display='none'">let's go</button>
+    </div>
+
+    <!-- desktop icons -->
+    <div class="desktop-icons">
+      <div class="icon" onclick="openApp('about')">
+        <div class="icon-img">📓</div>
+        <p>about roshan</p>
+      </div>
+      <div class="icon" onclick="openApp('gallery')">
+        <div class="icon-img">🖼️</div>
+        <p>gallery</p>
+      </div>
+      <div class="icon" onclick="openApp('music')">
+        <div class="icon-img">🎵</div>
+        <p>music</p>
+      </div>
+      <div class="icon" onclick="openApp('snake')">
+        <div class="icon-img">🐍</div>
+        <p>snake</p>
+      </div>
+      <div class="icon" onclick="openApp('ttt')">
+        <div class="icon-img">⭕</div>
+        <p>tic tac toe</p>
+      </div>
+      <div class="icon" onclick="openApp('calc')">
+        <div class="icon-img">🧮</div>
+        <p>calculator</p>
+      </div>
+      <div class="icon" onclick="openApp('notes')">
+        <div class="icon-img">📝</div>
+        <p>sticky notes</p>
+      </div>
+      <div class="icon" onclick="openApp('settings')">
+        <div class="icon-img">⚙️</div>
+        <p>settings</p>
+      </div>
+      <div class="icon" onclick="openApp('boba')">
+        <div class="icon-img">🧋</div>
+        <p>boba drops</p>
+      </div>
+      <div class="icon" onclick="openApp('portfolio')">
+        <div class="icon-img">🌐</div>
+        <p>portfolio</p>
+      </div>
+    </div>
+
+    <!-- taskbar -->
+    <div class="taskbar">
+      <div class="start-btn">⚡ start</div>
+      <div class="taskbar-info">
+        <span id="user-display">Innovator</span>
+        <span id="clock">--:--</span>
+      </div>
+    </div>
+
+    <!-- WINDOWS -->
+    <div class="window" id="win-about">
+      <div class="window-header">
+        <span>📓 about roshan</span>
+        <button onclick="closeApp('about')">×</button>
+      </div>
+      <div class="window-body">
+        <h3>hey, i'm roshan 👋</h3>
+        <p>i'm an innovative mind  who loves building websites, playing with code, and drinking boba.</p>
+        <p>this OS is my playground — every app here is built from scratch by me.</p>
+        <p><strong>skills:</strong> HTML, CSS, JavaScript, big ideas</p>
+        <p><strong>mission:</strong> turn imagination into code.</p>
+      </div>
+    </div>
+
+    <div class="window" id="win-gallery">
+      <div class="window-header">
+        <span>🖼️ photo gallery</span>
+        <button onclick="closeApp('gallery')">×</button>
+      </div>
+      <div class="window-body">
+        <div class="gallery-grid">
+          <div class="gallery-item">🎨</div>
+          <div class="gallery-item">🚀</div>
+          <div class="gallery-item">🤖</div>
+          <div class="gallery-item">💡</div>
+          <div class="gallery-item">⚙️</div>
+          <div class="gallery-item">🎮</div>
+        </div>
+        <p class="hint">replace emojis with your art in the code!</p>
+      </div>
+    </div>
+
+    <div class="window" id="win-music">
+      <div class="window-header">
+        <span>🎵 music player</span>
+        <button onclick="closeApp('music')">×</button>
+      </div>
+      <div class="window-body">
+        <div class="music-display">
+          <p class="track-name">🎧 chill beats.mp3</p>
+          <div class="music-controls">
+            <button>⏮</button>
+            <button id="play-btn">▶</button>
+            <button>⏭</button>
+          </div>
+          <div class="visualizer">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" id="win-snake">
+      <div class="window-header">
+        <span>🐍 snake</span>
+        <button onclick="closeApp('snake')">×</button>
+      </div>
+      <div class="window-body">
+        <canvas id="snake-canvas" width="300" height="300"></canvas>
+        <p>score: <span id="snake-score">0</span></p>
+        <button onclick="startSnake()">start / restart</button>
+        <p class="hint">use arrow keys</p>
+      </div>
+    </div>
+
+    <div class="window" id="win-ttt">
+      <div class="window-header">
+        <span>⭕ tic tac toe</span>
+        <button onclick="closeApp('ttt')">×</button>
+      </div>
+      <div class="window-body">
+        <div id="ttt-board"></div>
+        <p id="ttt-status">your turn (X)</p>
+        <button onclick="resetTTT()">reset</button>
+      </div>
+    </div>
+
+    <div class="window" id="win-calc">
+      <div class="window-header">
+        <span>🧮 calculator</span>
+        <button onclick="closeApp('calc')">×</button>
+      </div>
+      <div class="window-body">
+        <input type="text" id="calc-display" readonly>
+        <div class="calc-buttons">
+          <button onclick="calcClear()">C</button>
+          <button onclick="calcPress('/')">/</button>
+          <button onclick="calcPress('*')">*</button>
+          <button onclick="calcBack()">←</button>
+          <button onclick="calcPress('7')">7</button>
+          <button onclick="calcPress('8')">8</button>
+          <button onclick="calcPress('9')">9</button>
+          <button onclick="calcPress('-')">-</button>
+          <button onclick="calcPress('4')">4</button>
+          <button onclick="calcPress('5')">5</button>
+          <button onclick="calcPress('6')">6</button>
+          <button onclick="calcPress('+')">+</button>
+          <button onclick="calcPress('1')">1</button>
+          <button onclick="calcPress('2')">2</button>
+          <button onclick="calcPress('3')">3</button>
+          <button onclick="calcEqual()">=</button>
+          <button onclick="calcPress('0')" style="grid-column: span 2;">0</button>
+          <button onclick="calcPress('.')">.</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" id="win-notes">
+      <div class="window-header">
+        <span>📝 sticky notes</span>
+        <button onclick="closeApp('notes')">×</button>
+      </div>
+      <div class="window-body">
+        <textarea id="notes-area" placeholder="write your ideas here..."></textarea>
+        <button onclick="saveNotes()">save</button>
+        <span id="notes-status"></span>
+      </div>
+    </div>
+
+    <div class="window" id="win-settings">
+      <div class="window-header">
+        <span>⚙️ settings</span>
+        <button onclick="closeApp('settings')">×</button>
+      </div>
+      <div class="window-body">
+        <h3>change wallpaper</h3>
+        <div class="wallpaper-options">
+          <button onclick="setWallpaper('default')">default</button>
+          <button onclick="setWallpaper('grid')">grid</button>
+          <button onclick="setWallpaper('stars')">stars</button>
+          <button onclick="setWallpaper('circuit')">circuit</button>
+        </div>
+        <h3>change accent color</h3>
+        <div class="color-options">
+          <button style="background:#0ff" onclick="setAccent('#0ff')"></button>
+          <button style="background:#f0f" onclick="setAccent('#f0f')"></button>
+          <button style="background:#ff0" onclick="setAccent('#ff0')"></button>
+          <button style="background:#0f0" onclick="setAccent('#0f0')"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" id="win-boba">
+      <div class="window-header">
+        <span>🧋 boba drops</span>
+        <button onclick="closeApp('boba')">×</button>
+      </div>
+      <div class="window-body">
+        <iframe src="https://roshan-coder123.github.io/Boba-drops/" width="100%" height="400"></iframe>
+        <a href="https://roshan-coder123.github.io/Boba-drops/" target="_blank">open in new tab →</a>
+      </div>
+    </div>
+
+    <div class="window" id="win-portfolio">
+      <div class="window-header">
+        <span>🌐 portfolio</span>
+        <button onclick="closeApp('portfolio')">×</button>
+      </div>
+      <div class="window-body">
+        <iframe src="https://roshan-coder123.github.io/My-website-/" width="100%" height="400"></iframe>
+        <a href="https://roshan-coder123.github.io/My-website-/" target="_blank">open in new tab →</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
