@@ -35,7 +35,6 @@ body {
 .gear-3 { animation: spin 4s linear infinite; color: #ff0; text-shadow: 0 0 15px #ff0; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes spin-reverse { to { transform: rotate(-360deg); } }
-
 .lightbulb {
   font-size: 50px;
   animation: flicker 1.5s infinite;
@@ -45,7 +44,6 @@ body {
   0%, 100% { opacity: 1; text-shadow: 0 0 30px #ff0; }
   50% { opacity: 0.3; text-shadow: 0 0 5px #ff0; }
 }
-
 .os-title {
   font-size: 32px;
   color: #0ff;
