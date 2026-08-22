@@ -1,9 +1,5 @@
-// roShaN OS - script.js
-// handles boot sequence, login, window management, and all the little apps
-
 let username = "Innovator";
 
-// ---------- SCREEN SWITCHING ----------
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
@@ -13,7 +9,6 @@ function goToLogin() {
   showScreen("login-screen");
 }
 
-// boot screen -> login screen after the progress bar finishes, or on click/keypress
 window.addEventListener("DOMContentLoaded", () => {
   showScreen("boot-screen");
 
@@ -28,7 +23,6 @@ window.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", skipBoot);
   document.getElementById("boot-screen").addEventListener("click", skipBoot);
 
-  // login
   document.getElementById("login-btn").addEventListener("click", loginUser);
   document.getElementById("username-input").addEventListener("keydown", e => {
     if (e.key === "Enter") loginUser();
@@ -49,10 +43,9 @@ function loginUser() {
   document.getElementById("welcome-popup").style.display = "block";
 }
 
-// ---------- CLOCK ----------
 function startClock() {
   updateClock();
-  setInterval(updateClock, 1000 * 30); // don't need it to the second, half-minute is fine
+  setInterval(updateClock, 1000 * 30);
 }
 function updateClock() {
   const now = new Date();
@@ -63,28 +56,73 @@ function updateClock() {
   document.getElementById("clock").textContent = `${h}:${m} ${ampm}`;
 }
 
-// ---------- WINDOW MANAGEMENT ----------
 function openApp(name) {
   const win = document.getElementById("win-" + name);
   if (!win) return;
   win.classList.add("active");
 
-  // little offset so windows don't all stack exactly on top of each other
   const openCount = document.querySelectorAll(".window.active").length;
   win.style.top = (70 + openCount * 20) + "px";
   win.style.left = (60 + openCount * 20) + "px";
 
-  // lazy-init stuff that needs the DOM to exist first
   if (name === "ttt" && !window._tttInit) initTTT();
   if (name === "calc") document.getElementById("calc-display").value = calcExpr;
 }
+
+function setupWindowDragging() {
+  const desktop = document.getElementById("desktop");
+  document.querySelectorAll(".window").forEach(win => {
+    const header = win.querySelector(".window-header");
+    if (!header) return;
+
+    header.addEventListener("pointerdown", event => {
+      if (event.target.closest("button")) return;
+
+      const desktopRect = desktop.getBoundingClientRect();
+      const windowRect = win.getBoundingClientRect();
+      const offsetX = event.clientX - windowRect.left;
+      const offsetY = event.clientY - windowRect.top;
+      const maxX = Math.max(0, desktopRect.width - windowRect.width);
+      const maxY = Math.max(0, desktopRect.height - windowRect.height - 45);
+
+      win.style.zIndex = String(++window._topWindowIndex);
+      header.setPointerCapture(event.pointerId);
+      header.classList.add("dragging");
+
+      const moveWindow = moveEvent => {
+        const left = Math.min(maxX, Math.max(0, moveEvent.clientX - desktopRect.left - offsetX));
+        const top = Math.min(maxY, Math.max(0, moveEvent.clientY - desktopRect.top - offsetY));
+        win.style.left = left + "px";
+        win.style.top = top + "px";
+      };
+
+      const stopDragging = () => {
+        header.releasePointerCapture(event.pointerId);
+        header.classList.remove("dragging");
+        header.removeEventListener("pointermove", moveWindow);
+        header.removeEventListener("pointerup", stopDragging);
+        header.removeEventListener("pointercancel", stopDragging);
+      };
+
+      header.addEventListener("pointermove", moveWindow);
+      header.addEventListener("pointerup", stopDragging);
+      header.addEventListener("pointercancel", stopDragging);
+    });
+  });
+}
+
+window._topWindowIndex = 100;
+document.addEventListener("DOMContentLoaded", setupWindowDragging);
 
 function closeApp(name) {
   const win = document.getElementById("win-" + name);
   if (win) win.classList.remove("active");
 }
 
-// ---------- MUSIC PLAYER (fake, just toggles the visualizer) ----------
+function minimizeApp(name) {
+  closeApp(name);
+}
+
 let playing = false;
 document.addEventListener("DOMContentLoaded", () => {
   const playBtn = document.getElementById("play-btn");
@@ -95,14 +133,23 @@ document.addEventListener("DOMContentLoaded", () => {
       playBtn.textContent = playing ? "⏸" : "▶";
       viz.classList.toggle("paused", !playing);
     });
-    viz.classList.add("paused"); // start paused
+    viz.classList.add("paused");
+  }
+
+  const musicSelect = document.getElementById("music-select");
+  const musicAudio = document.getElementById("music-audio");
+  if (musicSelect && musicAudio) {
+    musicSelect.addEventListener("change", () => {
+      musicAudio.pause();
+      musicAudio.src = musicSelect.value;
+      musicAudio.load();
+    });
   }
 });
 
-// ---------- SNAKE ----------
 let snakeCtx, snakeInterval;
 let snake, snakeDir, food, snakeScore;
-const GRID = 15; // size of each cell in px, canvas is 300x300 -> 20x20 grid
+const GRID = 15;
 
 function startSnake() {
   const canvas = document.getElementById("snake-canvas");
@@ -123,7 +170,6 @@ function placeFood() {
     x: Math.floor(Math.random() * 20),
     y: Math.floor(Math.random() * 20)
   };
-  // make sure food doesn't land on the snake
   const onSnake = snake.some(s => s.x === food.x && s.y === food.y);
   if (onSnake) placeFood();
 }
@@ -131,7 +177,6 @@ function placeFood() {
 function snakeTick() {
   const head = { x: snake[0].x + snakeDir.x, y: snake[0].y + snakeDir.y };
 
-  // wall or self collision = game over
   const hitWall = head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20;
   const hitSelf = snake.some(s => s.x === head.x && s.y === head.y);
   if (hitWall || hitSelf) {
@@ -170,7 +215,6 @@ function drawSnake() {
 
 document.addEventListener("keydown", e => {
   if (!snakeDir) return;
-  // stop the browser from scrolling the page when playing
   if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
     e.preventDefault();
   }
@@ -180,7 +224,6 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowRight" && snakeDir.x !== -1) snakeDir = { x: 1, y: 0 };
 });
 
-// ---------- TIC TAC TOE ----------
 let tttBoard = Array(9).fill("");
 let tttTurn = "X";
 window._tttInit = false;
@@ -251,7 +294,7 @@ function endTTT(result) {
   const status = document.getElementById("ttt-status");
   if (result === "draw") status.textContent = "it's a draw";
   else status.textContent = result === "X" ? "you win! 🎉" : "computer wins";
-  tttTurn = null; // lock the board
+  tttTurn = null;
 }
 
 function resetTTT() {
@@ -261,7 +304,6 @@ function resetTTT() {
   renderTTT();
 }
 
-// ---------- CALCULATOR ----------
 let calcExpr = "";
 
 function calcPress(val) {
@@ -281,7 +323,6 @@ function calcClear() {
 
 function calcEqual() {
   try {
-    // only allow digits, operators, and dots - no funny business
     if (!/^[0-9+\-*/.\s]+$/.test(calcExpr)) throw new Error("bad input");
     const result = Function('"use strict"; return (' + calcExpr + ')')();
     calcExpr = String(result);
@@ -292,7 +333,6 @@ function calcEqual() {
   }
 }
 
-// ---------- STICKY NOTES ----------
 window.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("roshanos-notes");
   if (saved) document.getElementById("notes-area").value = saved;
@@ -306,7 +346,6 @@ function saveNotes() {
   setTimeout(() => status.textContent = "", 1500);
 }
 
-// ---------- SETTINGS ----------
 function setWallpaper(type) {
   const desktop = document.getElementById("desktop");
   desktop.classList.remove("wallpaper-grid", "wallpaper-stars", "wallpaper-circuit");
@@ -314,7 +353,6 @@ function setWallpaper(type) {
 }
 
 function setAccent(color) {
-  // swap out the main glow colors across the OS
   document.querySelectorAll(".os-title, #clock").forEach(el => {
     el.style.color = color;
     el.style.textShadow = `0 0 10px ${color}`;
