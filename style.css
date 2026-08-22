@@ -1,19 +1,30 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body {
-  font-family: 'Press Start 2P', monospace;
-  background:#000;
-  color:#0ff;
+
+   font-family: 'Press Start 2P', monospace;
+
+   background:#000;
+
+    color:#0ff;
+
   overflow:hidden;
-  height:100vh;
+
+    height:100vh;
+
   font-size:12px;
 }
 .screen{display:none;width:100vw;height:100vh}
+ 
 .screen.active{display:block}
 #boot-screen{
   background:radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
-  display:none;
+ 
+   display:none;
+
   justify-content:center;
-  align-items:center;
+ 
+  
+   align-items:center;
   cursor:pointer;
 }
 #boot-screen.active{display:flex}
@@ -22,26 +33,35 @@ body {
 
 .gears{
   display:flex;
+
+  
   justify-content: center;
+ 
   gap:20px;
-  font-size:40px;
+
+   font-size:40px;
   margin-bottom:20px;
 }
 .gear{color:#0ff;text-shadow:0 0 15px #0ff;animation: spin 3s linear infinite}
 .gear-2{animation:spin-reverse 2s linear infinite;color:#f0f;text-shadow: 0 0 15px #f0f}
+ 
 .gear-3{animation: spin 4s linear infinite; color:#ff0; text-shadow:0 0 15px #ff0}
 @keyframes spin{ to{transform:rotate(360deg)} }
-@keyframes spin-reverse { to { transform: rotate(-360deg);} }
+
+ @keyframes spin-reverse { to { transform: rotate(-360deg);} }
 .lightbulb{
   font-size:50px;
-  animation:flicker 1.5s infinite;
+
+   animation:flicker 1.5s infinite;
   margin-bottom: 20px;
 }
 @keyframes flicker{
+ 
   0%,100%{opacity:1;text-shadow:0 0 30px #ff0}
   50%{opacity:.3;text-shadow:0 0 5px #ff0}
 }
 .os-title{
+ 
   font-size:32px;
   color:#0ff;
   text-shadow: 0 0 20px #0ff;
@@ -52,10 +72,14 @@ body {
 .version{color:#666; margin-bottom:30px;font-size:10px}
 
 .progress-bar{
-  width:300px;
+ 
+   width:300px;
   height:15px;
-  border: 2px solid #0ff;
-  margin: 0 auto 15px;
+
+
+   border: 2px solid #0ff;
+ 
+   margin: 0 auto 15px;
   box-shadow:0 0 10px #0ff;
 }
 
@@ -71,6 +95,7 @@ body {
 .boot-status{color:#0f0;font-size:10px;margin-bottom:10px}
 .skip-hint{color:#555;font-size:8px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
 
 
 #login-screen{
@@ -99,10 +124,14 @@ body {
 
 #username-input{
   background:#000;
-  border:2px solid #f0f;
+  
+   border:2px solid #f0f;
   color:#0ff;
-  padding:12px;
-  font-family:inherit;
+
+   padding:12px;
+
+   font-family:inherit;
+
   font-size:12px;
   width:280px;
   margin-bottom:20px;
@@ -112,10 +141,16 @@ body {
 
 #login-btn{
   background:#0ff;
+ 
   color:#000;
-  border:none;
+ 
+   border:none;
+ 
+ 
   padding:12px 30px;
-  font-family:inherit;
+ 
+   font-family:inherit;
+
   font-size:12px;
   cursor:pointer;
   box-shadow:0 0 15px #0ff;
@@ -123,11 +158,15 @@ body {
 #login-btn:hover {background:#f0f;box-shadow:0 0 20px #f0f}
 
 .floating-gadgets {position:absolute;inset:0;pointer-events:none}
-.floating-gadgets span{
+
+  .floating-gadgets span{
+ 
   position:absolute;
   font-size:30px;
-  opacity: 0.4;
-  animation: float 6s infinite ease-in-out;
+
+     opacity: 0.4;
+
+    animation: float 6s infinite ease-in-out;
 }
 
     
@@ -151,11 +190,18 @@ body {
 }
 
 #desktop{
+ 
   background-color:#050510;
-  background-image: url("default background.png");
+ 
+   background-image: url("default background.png");
   background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+ 
+
+   background-position:center;
+ 
+   background-repeat:no-repeat;
+
+   
   position:relative;
   height:100vh;
 }
@@ -169,11 +215,16 @@ body {
 }
 #desktop.wallpaper-stars{
   background-image:url("star background.jpg");
+ 
+   
   background-size: cover;
-  background-position:center;
-  background-repeat:no-repeat;
+   background-position:center;
+
+    background-repeat:no-repeat;
+
 }
 #desktop.wallpaper-circuit{
+
   background-image:url("circuit background.jpg");
   background-size:cover;
  
@@ -187,23 +238,32 @@ body {
   top:40%;
 
   left:50%;
-  transform:translate(-50%, -50%);
+ 
+    transform:translate(-50%, -50%);
   background:rgba(0,20,40,.95);
+
   border:2px solid #0ff;
   box-shadow:0 0 25px #0ff;
-  padding:25px 30px;
+ 
+   padding:25px 30px;
   text-align:center;
+ 
   z-index:999;
   max-width:320px;
+
 }
 .popup h3{margin-bottom:12px;color:#0ff;font-size:13px}
 .popup p{margin-bottom:15px;font-size:10px;color:#ccc;line-height:1.6}
 .popup button{
   background:#0ff;
-  border:none;
+ 
+   border:none;
   color:#000;
+
   padding:10px 20px;
-  font-family:inherit;
+
+    font-family:inherit;
+
   font-size:10px;
   cursor:pointer;
 }
@@ -224,8 +284,11 @@ body {
   border-radius:4px;
 }
 .icon:hover{background:rgba(0,255,255,.1)}
-.icon-img{font-size:32px;margin-bottom:5px}
-.icon p{font-size:8px;color:#0ff;word-wrap:break-word}
+ 
+ .icon-img{font-size:32px;margin-bottom:5px}
+
+ 
+ .icon p{font-size:8px;color:#0ff;word-wrap:break-word}
 
 
 .taskbar{
@@ -240,8 +303,11 @@ body {
   padding:0 15px;
 }
 .start-btn{
+
+  
   color:#0ff;
-  font-size:10px;
+
+   font-size:10px;
   cursor:pointer;
   text-shadow:0 0 8px #0ff;
 }
@@ -252,10 +318,14 @@ body {
   top:80px;
  
   left:80px;
-  width:420px;
+ 
+   width:420px;
   max-width:90vw;
+
   background:rgba(5,10,25,.97);
+ 
   border: 2px solid #0ff;
+ 
   box-shadow:0 0 25px rgba(0,255,255,.5);
   z-index:100;
 }
@@ -286,8 +356,12 @@ body {
 .window-header button:hover{background:#f0f;color:#000}
 
 .window-body{
-  padding:18px;
-  max-height:65vh;
+ 
+   padding:18px;
+
+   max-height:65vh;
+
+ 
   overflow-y:auto;
   font-size:10px;
   line-height:1.7;
@@ -308,6 +382,7 @@ body {
   background:#0ff;
 
   color:#000!important;
+ 
   padding:11px 14px;
   text-decoration:none;
 }
@@ -322,10 +397,14 @@ body {
   text-align:center;
 }
 .gallery-launch-icon{font-size:42px;margin-bottom:14px}
-.gallery-launch p{color:#ccc;margin-bottom:18px}
+ 
+ .gallery-launch p{color:#ccc;margin-bottom:18px}
 .gallery-link{
+
   display:inline-block;
-  background:#0ff;
+ 
+   background:#0ff;
+
   color:#000!important;
 
   padding:11px 14px;
@@ -351,36 +430,54 @@ body {
 .hint{color:#666;font-size:8px}
 
 
-.music-display{text-align:center}
+ 
+ .music-display{text-align:center}
+ 
+ 
 .track-name{margin-bottom:15px;color:#0f0}
+
+
 .music-label{display:block;color:#0ff;font-size:9px;margin-bottom:8px}
-#music-select{
-  width:100%;
-  background:#000;
+ 
+  #music-select{
+ 
+    width:100%;
+   
+    background:#000;
 
   border:1px solid #0ff;
-  color:#0ff;
-  padding:9px;
+
+     color:#0ff;
+ 
+     padding:9px;
   font-family:inherit;
-  font-size:9px;
+ 
+     font-size:9px;
   margin-bottom:12px;
 }
 
 .music-player{
   display:block;
+  
   width:100%;
 
+  
   height:40px;
+ 
   border:1px solid #0ff;
   margin-bottom:12px;
 }
 
 .music-link{
   display:inline-block;
-  background:#f0f;
+ 
+   background:#f0f;
   color:#000;
+ 
   padding:11px 14px;
-  text-decoration:none;
+
+   text-decoration:none;
+
   cursor:pointer;
 }
 .music-link:hover{background:#0ff}
@@ -395,10 +492,14 @@ body {
   background:transparent;
 
   border:1px solid #0ff;
+ 
   color:#0ff;
-  font-size:14px;
+  
+   font-size:14px;
 
+ 
   padding:8px 12px;
+
   cursor:pointer;
 }
 .music-controls button:hover{background:#0ff;color:#000}
@@ -432,20 +533,29 @@ body {
 
 
 #snake-canvas{
-  background:#000;
+ 
+   background:#000;
+
   border:1px solid #0ff;
-  display:block;
+
+    display:block;
   margin:0 auto 10px;
 }
 #win-snake button{
   background:#0ff;
-  border:none;
+
+   border:none;
+ 
   color:#000;
-  padding:8px 14px;
+
+   padding:8px 14px;
+ 
   font-family:inherit;
+ 
   font-size:9px;
+ 
   cursor:pointer;
-  margin-top:8px;
+    margin-top:8px;
 }
 #ttt-board{
   display:grid;
@@ -462,20 +572,30 @@ body {
   background:rgba(0,255,255,.05);
 
   border:1px solid #0ff;
-  font-size:22px;
+
+    
+   font-size:22px;
   display:flex;
+ 
+   
   align-items:center;
 
   justify-content:center;
-  cursor:pointer;
+
+  
+   cursor:pointer;
 }
 .ttt-cell:hover{background:rgba(0,255,255,.15)}
 #win-ttt button{
   background:#f0f;
 
-  border:none;
+ 
+   
+   border:none;
+
   color:#000;
-  padding:8px 14px;
+
+   padding:8px 14px;
 
   font-family:inherit;
   font-size:9px;
@@ -486,12 +606,21 @@ body {
 #calc-display{
   width:100%;
   background:#000;
-  border:1px solid #0ff;
+  
+   border:1px solid #0ff;
+ 
   color:#0f0;
+
+   
   font-family:inherit;
-  font-size:16px;
+
+ 
+   font-size:16px;
+ 
   padding:10px;
-  text-align:right;
+
+   text-align:right;
+
   margin-bottom:8px;
 }
 
@@ -501,6 +630,8 @@ body {
   gap:6px;
 }
 .calc-buttons button{
+
+    
   background:rgba(0,255,255,.08);
   border: 1px solid #0ff;
   color:#0ff;
@@ -529,13 +660,21 @@ body {
   margin-bottom:8px;
 }
 #win-notes button{
-  background:#0ff;
+ 
+
+   background:#0ff;
+  
   border:none;
   color:#000;
+  
   padding:8px 14px;
+ 
+
   font-family:inherit;
   font-size:9px;
-  cursor:pointer;
+
+   
+   cursor:pointer;
 }
 #notes-status{margin-left:10px;color:#0f0;font-size:9px}
 
@@ -553,9 +692,13 @@ body {
 
   color:#0ff;
 
-  padding:8px 10px;
-  font-family:inherit;
-  font-size:8px;
+
+    padding:8px 10px;
+
+   font-family:inherit;
+
+
+   font-size:8px;
   cursor:pointer;
 }
 .wallpaper-options button:hover{background:#0ff;color:#000}
@@ -569,7 +712,10 @@ body {
 }
 
 
-@media(max-width:500px){
-  .window{left:5vw;width:90vw;top:60px}
-  .desktop-icons{grid-template-columns:repeat(auto-fill, 70px)}
+
+ @media(max-width:500px){
+
+   .window{left:5vw;width:90vw;top:60px}
+ 
+   .desktop-icons{grid-template-columns:repeat(auto-fill, 70px)}
 }
