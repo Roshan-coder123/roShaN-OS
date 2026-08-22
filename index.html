@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- BOOT SCREEN -->
+  <!-- boot screen -->
   <div id="boot-screen" class="screen active">
     <div class="boot-content">
       <div class="gears">
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <!-- LOGIN SCREEN -->
+  <!-- login -->
   <div id="login-screen" class="screen">
     <div class="login-box">
       <h2>what should we call you, creator?</h2>
@@ -41,16 +41,15 @@
     </div>
   </div>
 
-  <!-- DESKTOP -->
+  <!-- desktop -->
   <div id="desktop" class="screen">
-    <!-- welcome popup -->
+
     <div id="welcome-popup" class="popup">
       <h3>welcome, <span id="welcome-name">Innovator</span>! 🎉</h3>
       <p>roShaN OS is ready. start creating.</p>
       <button onclick="document.getElementById('welcome-popup').style.display='none'">let's go</button>
     </div>
 
-    <!-- desktop icons -->
     <div class="desktop-icons">
       <div class="icon" onclick="openApp('about')">
         <div class="icon-img">📓</div>
@@ -66,7 +65,7 @@
       </div>
       <div class="icon" onclick="openApp('snake')">
         <div class="icon-img">🐍</div>
-        <p>snake</p>
+        <p>snake game</p>
       </div>
       <div class="icon" onclick="openApp('ttt')">
         <div class="icon-img">⭕</div>
@@ -86,15 +85,18 @@
       </div>
       <div class="icon" onclick="openApp('boba')">
         <div class="icon-img">🧋</div>
-        <p>boba drops</p>
+        <p>boba drops web</p>
       </div>
       <div class="icon" onclick="openApp('portfolio')">
         <div class="icon-img">🌐</div>
-        <p>portfolio</p>
+        <p>roShaN's portfolio</p>
+      </div>
+      <div class="icon" onclick="openApp('chrome')">
+        <div class="icon-img">🌍</div>
+        <p>google chrome</p>
       </div>
     </div>
 
-    <!-- taskbar -->
     <div class="taskbar">
       <div class="start-btn">⚡ start</div>
       <div class="taskbar-info">
@@ -103,63 +105,70 @@
       </div>
     </div>
 
-    <!-- WINDOWS -->
+    <!-- all the app windows, hidden until you click an icon -->
+
     <div class="window" id="win-about">
       <div class="window-header">
-        <span>📓 about roshan</span>
-        <button onclick="closeApp('about')">×</button>
+        <span>📓 about roShaN</span>
+        <div class="window-controls"><button onclick="minimizeApp('about')">−</button><button onclick="closeApp('about')">×</button></div>
       </div>
       <div class="window-body">
-        <h3>hey, i'm roshan 👋</h3>
-        <p>i'm an innovative mind  who loves building websites, playing with code, and drinking boba.</p>
+        <h3>hey, I'm roShaN</h3>
+        <p>I'm an innovative man who loves building websites, playing with code, and making gadgets.</p>
         <p>this OS is my playground — every app here is built from scratch by me.</p>
         <p><strong>skills:</strong> HTML, CSS, JavaScript, big ideas</p>
-        <p><strong>mission:</strong> turn imagination into code.</p>
+        <p><strong>mission:</strong> turn imagination into web through code.</p>
       </div>
     </div>
 
     <div class="window" id="win-gallery">
       <div class="window-header">
         <span>🖼️ photo gallery</span>
-        <button onclick="closeApp('gallery')">×</button>
+        <div class="window-controls"><button onclick="minimizeApp('gallery')">−</button><button onclick="closeApp('gallery')">×</button></div>
       </div>
       <div class="window-body">
-        <div class="gallery-grid">
-          <div class="gallery-item">🎨</div>
-          <div class="gallery-item">🚀</div>
-          <div class="gallery-item">🤖</div>
-          <div class="gallery-item">💡</div>
-          <div class="gallery-item">⚙️</div>
-          <div class="gallery-item">🎮</div>
+        <div class="gallery-launch">
+          <div class="gallery-launch-icon">🌌</div>
+          <p>explore NASA's universe image gallery</p>
+          <a class="gallery-link" href="https://science.nasa.gov/gallery/universe-images/" target="_blank" rel="noopener noreferrer">open NASA gallery →</a>
         </div>
-        <p class="hint">replace emojis with your art in the code!</p>
       </div>
     </div>
 
     <div class="window" id="win-music">
       <div class="window-header">
         <span>🎵 music player</span>
-        <button onclick="closeApp('music')">×</button>
+        <div class="window-controls"><button onclick="minimizeApp('music')">−</button><button onclick="closeApp('music')">×</button></div>
       </div>
       <div class="window-body">
         <div class="music-display">
-          <p class="track-name">🎧 chill beats.mp3</p>
-          <div class="music-controls">
-            <button>⏮</button>
-            <button id="play-btn">▶</button>
-            <button>⏭</button>
-          </div>
-          <div class="visualizer">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
+          <p class="track-name">🎧 music playlist</p>
+          <label class="music-label" for="music-select">choose a track</label>
+          <select id="music-select">
+            <option value="music1.mp3">music 1</option>
+            <option value="music2%20.mp3">music 2</option>
+            <option value="music3.mp3">music 3</option>
+            <option value="music4.mp3">music 4</option>
+            <option value="music5.mp3">music 5</option>
+            <option value="music6.mp3">music 6</option>
+            <option value="music7.mp3">music 7</option>
+            <option value="music8.mp3">music 8</option>
+            <option value="music9.mp3">music 9</option>
+            <option value="music10.mp3">music 10</option>
+            <option value="music11.mp3">music 11</option>
+          </select>
+          <audio id="music-audio" class="music-player" controls preload="none">
+            <source src="music1.mp3" type="audio/mpeg">
+            Your browser does not support audio playback.
+          </audio>
         </div>
       </div>
     </div>
 
     <div class="window" id="win-snake">
       <div class="window-header">
-        <span>🐍 snake</span>
-        <button onclick="closeApp('snake')">×</button>
+        <span>🐍 snake game</span>
+        <div class="window-controls"><button onclick="minimizeApp('snake')">−</button><button onclick="closeApp('snake')">×</button></div>
       </div>
       <div class="window-body">
         <canvas id="snake-canvas" width="300" height="300"></canvas>
@@ -172,7 +181,7 @@
     <div class="window" id="win-ttt">
       <div class="window-header">
         <span>⭕ tic tac toe</span>
-        <button onclick="closeApp('ttt')">×</button>
+        <div class="window-controls"><button onclick="minimizeApp('ttt')">−</button><button onclick="closeApp('ttt')">×</button></div>
       </div>
       <div class="window-body">
         <div id="ttt-board"></div>
@@ -184,7 +193,7 @@
     <div class="window" id="win-calc">
       <div class="window-header">
         <span>🧮 calculator</span>
-        <button onclick="closeApp('calc')">×</button>
+        <div class="window-controls"><button onclick="minimizeApp('calc')">−</button><button onclick="closeApp('calc')">×</button></div>
       </div>
       <div class="window-body">
         <input type="text" id="calc-display" readonly>
@@ -214,7 +223,7 @@
     <div class="window" id="win-notes">
       <div class="window-header">
         <span>📝 sticky notes</span>
-        <button onclick="closeApp('notes')">×</button>
+        <div class="window-controls"><button onclick="minimizeApp('notes')">−</button><button onclick="closeApp('notes')">×</button></div>
       </div>
       <div class="window-body">
         <textarea id="notes-area" placeholder="write your ideas here..."></textarea>
@@ -226,7 +235,7 @@
     <div class="window" id="win-settings">
       <div class="window-header">
         <span>⚙️ settings</span>
-        <button onclick="closeApp('settings')">×</button>
+        <div class="window-controls"><button onclick="minimizeApp('settings')">−</button><button onclick="closeApp('settings')">×</button></div>
       </div>
       <div class="window-body">
         <h3>change wallpaper</h3>
@@ -248,25 +257,40 @@
 
     <div class="window" id="win-boba">
       <div class="window-header">
-        <span>🧋 boba drops</span>
-        <button onclick="closeApp('boba')">×</button>
+        <span>🧋 my boba drops</span>
+        <div class="window-controls"><button onclick="minimizeApp('boba')">−</button><button onclick="closeApp('boba')">×</button></div>
       </div>
       <div class="window-body">
         <iframe src="https://roshan-coder123.github.io/Boba-drops/" width="100%" height="400"></iframe>
-        <a href="https://roshan-coder123.github.io/Boba-drops/" target="_blank">open in new tab →</a>
+        <a href="https://roshan-coder123.github.io/Boba-drops/" target="_blank" rel="noopener noreferrer">open Boba Drops in new tab →</a>
       </div>
     </div>
 
     <div class="window" id="win-portfolio">
       <div class="window-header">
         <span>🌐 portfolio</span>
-        <button onclick="closeApp('portfolio')">×</button>
+        <div class="window-controls"><button onclick="minimizeApp('portfolio')">−</button><button onclick="closeApp('portfolio')">×</button></div>
       </div>
       <div class="window-body">
         <iframe src="https://roshan-coder123.github.io/My-website-/" width="100%" height="400"></iframe>
         <a href="https://roshan-coder123.github.io/My-website-/" target="_blank">open in new tab →</a>
       </div>
     </div>
+
+    <div class="window" id="win-chrome">
+      <div class="window-header">
+        <span>🌍 chrome</span>
+        <div class="window-controls"><button onclick="minimizeApp('chrome')">−</button><button onclick="closeApp('chrome')">×</button></div>
+      </div>
+      <div class="window-body">
+        <div class="browser-launch">
+          <div class="browser-icon">🌍</div>
+          <p>open Google directly in a new tab</p>
+          <a class="browser-link" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">open Google →</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script src="script.js"></script>
