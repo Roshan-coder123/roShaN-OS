@@ -4,7 +4,6 @@ function showScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
-
 function goToLogin() {
   showScreen("login-screen");
 }
@@ -22,7 +21,6 @@ window.addEventListener("DOMContentLoaded", () => {
   };
   document.addEventListener("keydown", skipBoot);
   document.getElementById("boot-screen").addEventListener("click", skipBoot);
-
   document.getElementById("login-btn").addEventListener("click", loginUser);
   document.getElementById("username-input").addEventListener("keydown", e => {
     if (e.key === "Enter") loginUser();
@@ -74,34 +72,32 @@ function setupWindowDragging() {
   document.querySelectorAll(".window").forEach(win => {
     const header = win.querySelector(".window-header");
     if (!header) return;
-
     header.addEventListener("pointerdown", event => {
       if (event.target.closest("button")) return;
 
-      const desktopRect = desktop.getBoundingClientRect();
+    const desktopRect = desktop.getBoundingClientRect();
       const windowRect = win.getBoundingClientRect();
-      const offsetX = event.clientX - windowRect.left;
-      const offsetY = event.clientY - windowRect.top;
-      const maxX = Math.max(0, desktopRect.width - windowRect.width);
-      const maxY = Math.max(0, desktopRect.height - windowRect.height - 45);
+  const offsetX = event.clientX - windowRect.left;
+     const offsetY = event.clientY - windowRect.top;   const maxX = Math.max(0, desktopRect.width - windowRect.width);
+    const maxY = Math.max(0, desktopRect.height - windowRect.height - 45);
 
       win.style.zIndex = String(++window._topWindowIndex);
       header.setPointerCapture(event.pointerId);
-      header.classList.add("dragging");
+    header.classList.add("dragging");
 
       const moveWindow = moveEvent => {
         const left = Math.min(maxX, Math.max(0, moveEvent.clientX - desktopRect.left - offsetX));
-        const top = Math.min(maxY, Math.max(0, moveEvent.clientY - desktopRect.top - offsetY));
+       const top = Math.min(maxY, Math.max(0, moveEvent.clientY - desktopRect.top - offsetY));
         win.style.left = left + "px";
         win.style.top = top + "px";
       };
 
       const stopDragging = () => {
-        header.releasePointerCapture(event.pointerId);
-        header.classList.remove("dragging");
+    header.releasePointerCapture(event.pointerId);
+     header.classList.remove("dragging");
         header.removeEventListener("pointermove", moveWindow);
-        header.removeEventListener("pointerup", stopDragging);
-        header.removeEventListener("pointercancel", stopDragging);
+     header.removeEventListener("pointerup", stopDragging);
+      header.removeEventListener("pointercancel", stopDragging);
       };
 
       header.addEventListener("pointermove", moveWindow);
@@ -141,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (musicSelect && musicAudio) {
     musicSelect.addEventListener("change", () => {
       musicAudio.pause();
-      musicAudio.src = musicSelect.value;
+  musicAudio.src = musicSelect.value;
       musicAudio.load();
     });
   }
