@@ -1,32 +1,24 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  
-   <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <title>roShaN OS v1.01</title>
-
-  
-   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
-  
+  <!-- boot screen -->
   <div id="boot-screen" class="screen active">
     <div class="boot-content">
       <div class="gears">
         <div class="gear gear-1">⚙</div>
         <div class="gear gear-2">⚙</div>
-
-         
-         <div class="gear gear-3">⚙</div>
+        <div class="gear gear-3">⚙</div>
       </div>
       <div class="lightbulb">💡</div>
- 
-       <h1 class="os-title">roShaN OS</h1>
+      <h1 class="os-title">roShaN OS</h1>
       <p class="os-tagline">designed for innovative minds</p>
-  
       <p class="version">v1.01</p>
       <div class="progress-bar">
         <div class="progress-fill"></div>
@@ -36,23 +28,20 @@
     </div>
   </div>
 
-  
+  <!-- login -->
   <div id="login-screen" class="screen">
-  
     <div class="login-box">
       <h2>what should we call you, creator?</h2>
- 
       <input type="text" id="username-input" placeholder="enter your name..." maxlength="15">
       <button id="login-btn">enter os →</button>
     </div>
- 
     <div class="floating-gadgets">
       <span>🤖</span><span>🚀</span><span>⚙</span><span>💡</span>
       <span>🎮</span><span>🔧</span><span>🛸</span><span>⭐</span>
     </div>
   </div>
 
-  
+  <!-- desktop -->
   <div id="desktop" class="screen">
 
     <div id="welcome-popup" class="popup">
@@ -64,13 +53,10 @@
     <div class="desktop-icons">
       <div class="icon" onclick="openApp('about')">
         <div class="icon-img">📓</div>
-    
         <p>about roshan</p>
       </div>
       <div class="icon" onclick="openApp('gallery')">
         <div class="icon-img">🖼️</div>
-   
-         
         <p>gallery</p>
       </div>
       <div class="icon" onclick="openApp('music')">
@@ -79,28 +65,22 @@
       </div>
       <div class="icon" onclick="openApp('snake')">
         <div class="icon-img">🐍</div>
-      
         <p>snake game</p>
       </div>
       <div class="icon" onclick="openApp('ttt')">
         <div class="icon-img">⭕</div>
         <p>tic tac toe</p>
-    
-        
       </div>
       <div class="icon" onclick="openApp('calc')">
         <div class="icon-img">🧮</div>
-     
         <p>calculator</p>
       </div>
       <div class="icon" onclick="openApp('notes')">
         <div class="icon-img">📝</div>
- 
-         <p>sticky notes</p>
+        <p>sticky notes</p>
       </div>
       <div class="icon" onclick="openApp('settings')">
         <div class="icon-img">⚙️</div>
-  
         <p>settings</p>
       </div>
       <div class="icon" onclick="openApp('boba')">
@@ -112,7 +92,6 @@
         <p>roShaN's portfolio</p>
       </div>
       <div class="icon" onclick="openApp('chrome')">
-       
         <div class="icon-img">🌍</div>
         <p>google chrome</p>
       </div>
@@ -120,17 +99,13 @@
 
     <div class="taskbar">
       <div class="start-btn">⚡ start</div>
-     
-    
       <div class="taskbar-info">
         <span id="user-display">Innovator</span>
-    
-         
         <span id="clock">--:--</span>
       </div>
     </div>
 
-    
+    <!-- all the app windows, hidden until you click an icon -->
 
     <div class="window" id="win-about">
       <div class="window-header">
@@ -139,28 +114,20 @@
       </div>
       <div class="window-body">
         <h3>hey, I'm roShaN</h3>
-      
-         <p>I'm an innovative man who loves building websites, playing with code, and making gadgets.</p>
+        <p>I'm an innovative man who loves building websites, playing with code, and making gadgets.</p>
         <p>this OS is my playground — every app here is built from scratch by me.</p>
-
-         
-         <p><strong>skills:</strong> HTML, CSS, JavaScript, big ideas</p>
-      
+        <p><strong>skills:</strong> HTML, CSS, JavaScript, big ideas</p>
         <p><strong>mission:</strong> turn imagination into web through code.</p>
-    
       </div>
     </div>
 
     <div class="window" id="win-gallery">
       <div class="window-header">
         <span>🖼️ photo gallery</span>
-    
         <div class="window-controls"><button onclick="minimizeApp('gallery')">−</button><button onclick="closeApp('gallery')">×</button></div>
       </div>
       <div class="window-body">
-    
         <div class="gallery-launch">
-     
           <div class="gallery-launch-icon">🌌</div>
           <p>explore NASA's universe image gallery</p>
           <a class="gallery-link" href="https://science.nasa.gov/gallery/universe-images/" target="_blank" rel="noopener noreferrer">open NASA gallery →</a>
@@ -178,23 +145,17 @@
           <p class="track-name">🎧 music playlist</p>
           <label class="music-label" for="music-select">choose a track</label>
           <select id="music-select">
-                      <option value="music1.mp3">music 1</option>
-               
-             <option value="music2%20.mp3">music 2</option>
-           
+            <option value="music1.mp3">music 1</option>
+            <option value="music2%20.mp3">music 2</option>
             <option value="music3.mp3">music 3</option>
-                         <option value="music4.mp3">music 4</option>
-               
+            <option value="music4.mp3">music 4</option>
             <option value="music5.mp3">music 5</option>
-          
             <option value="music6.mp3">music 6</option>
-            
             <option value="music7.mp3">music 7</option>
-                      <option value="music8.mp3">music 8</option>
-             
+            <option value="music8.mp3">music 8</option>
             <option value="music9.mp3">music 9</option>
-                        <option value="music10.mp3">music 10</option>
-                      <option value="music11.mp3">music 11</option>
+            <option value="music10.mp3">music 10</option>
+            <option value="music11.mp3">music 11</option>
           </select>
           <audio id="music-audio" class="music-player" controls preload="none">
             <source src="music1.mp3" type="audio/mpeg">
@@ -207,15 +168,11 @@
     <div class="window" id="win-snake">
       <div class="window-header">
         <span>🐍 snake game</span>
-
-        
         <div class="window-controls"><button onclick="minimizeApp('snake')">−</button><button onclick="closeApp('snake')">×</button></div>
       </div>
-   
       <div class="window-body">
         <canvas id="snake-canvas" width="300" height="300"></canvas>
         <p>score: <span id="snake-score">0</span></p>
-   
         <button onclick="startSnake()">start / restart</button>
         <p class="hint">use arrow keys</p>
       </div>
@@ -223,86 +180,54 @@
 
     <div class="window" id="win-ttt">
       <div class="window-header">
-                <span>⭕ tic tac toe</span>
+        <span>⭕ tic tac toe</span>
         <div class="window-controls"><button onclick="minimizeApp('ttt')">−</button><button onclick="closeApp('ttt')">×</button></div>
       </div>
-               <div class="window-body">
+      <div class="window-body">
         <div id="ttt-board"></div>
-                              <p id="ttt-status">your turn (X)</p>
+        <p id="ttt-status">your turn (X)</p>
         <button onclick="resetTTT()">reset</button>
-                  </div>
+      </div>
     </div>
 
     <div class="window" id="win-calc">
       <div class="window-header">
         <span>🧮 calculator</span>
-    
-        
-           <div class="window-controls"><button onclick="minimizeApp('calc')">−</button><button onclick="closeApp('calc')">×</button></div>
+        <div class="window-controls"><button onclick="minimizeApp('calc')">−</button><button onclick="closeApp('calc')">×</button></div>
       </div>
       <div class="window-body">
         <input type="text" id="calc-display" readonly>
-    
-        
-        
         <div class="calc-buttons">
           <button onclick="calcClear()">C</button>
-                    <button onclick="calcPress('/')">/</button>
-         
-            
-               <button onclick="calcPress('*')">*</button>
-                                                             
+          <button onclick="calcPress('/')">/</button>
+          <button onclick="calcPress('*')">*</button>
           <button onclick="calcBack()">←</button>
-                        <button onclick="calcPress('7')">7</button>
-        
+          <button onclick="calcPress('7')">7</button>
           <button onclick="calcPress('8')">8</button>
-                   <button onclick="calcPress('9')">9</button>
-      
+          <button onclick="calcPress('9')">9</button>
           <button onclick="calcPress('-')">-</button>
-                    <button onclick="calcPress('4')">4</button>
-          
+          <button onclick="calcPress('4')">4</button>
           <button onclick="calcPress('5')">5</button>
-                   <button onclick="calcPress('6')">6</button>
-       
-        
+          <button onclick="calcPress('6')">6</button>
           <button onclick="calcPress('+')">+</button>
-                            <button onclick="calcPress('1')">1</button>
-                        <button onclick="calcPress('2')">2</button>
-     
+          <button onclick="calcPress('1')">1</button>
+          <button onclick="calcPress('2')">2</button>
           <button onclick="calcPress('3')">3</button>
-                   <button onclick="calcEqual()">=</button>
-
-          
-           <button onclick="calcPress('0')" style="grid-column: span 2;">0</button>
-                  <button onclick="calcPress('.')">.</button>
+          <button onclick="calcEqual()">=</button>
+          <button onclick="calcPress('0')" style="grid-column: span 2;">0</button>
+          <button onclick="calcPress('.')">.</button>
         </div>
       </div>
     </div>
 
     <div class="window" id="win-notes">
       <div class="window-header">
-
-        
         <span>📝 sticky notes</span>
-
-        
-        
-        
-        
-        
-     
         <div class="window-controls"><button onclick="minimizeApp('notes')">−</button><button onclick="closeApp('notes')">×</button></div>
-     
       </div>
-
-      
       <div class="window-body">
-        
-        
-        
-                 <textarea id="notes-area" placeholder="write your ideas here..."></textarea>
-                          
-                       <button onclick="saveNotes()">save</button>
+        <textarea id="notes-area" placeholder="write your ideas here..."></textarea>
+        <button onclick="saveNotes()">save</button>
         <span id="notes-status"></span>
       </div>
     </div>
@@ -312,30 +237,20 @@
         <span>⚙️ settings</span>
         <div class="window-controls"><button onclick="minimizeApp('settings')">−</button><button onclick="closeApp('settings')">×</button></div>
       </div>
-                    <div class="window-body">
-                   <h3>change wallpaper</h3>
-      
-              <div class="wallpaper-options">
-         
-          
-          
-          
-                <button onclick="setWallpaper('default')">default</button>
-                       <button onclick="setWallpaper('grid')">grid</button>
-                    
+      <div class="window-body">
+        <h3>change wallpaper</h3>
+        <div class="wallpaper-options">
+          <button onclick="setWallpaper('default')">default</button>
+          <button onclick="setWallpaper('grid')">grid</button>
           <button onclick="setWallpaper('stars')">stars</button>
-        
-                 <button onclick="setWallpaper('circuit')">circuit</button>
+          <button onclick="setWallpaper('circuit')">circuit</button>
         </div>
         <h3>change accent color</h3>
         <div class="color-options">
-      
-           <button style="background:#0ff" onclick="setAccent('#0ff')"></button>
-                     <button style="background:#f0f" onclick="setAccent('#f0f')"></button>
-               
-           <button style="background:#ff0" onclick="setAccent('#ff0')"></button>
-              
-              <button style="background:#0f0" onclick="setAccent('#0f0')"></button>
+          <button style="background:#0ff" onclick="setAccent('#0ff')"></button>
+          <button style="background:#f0f" onclick="setAccent('#f0f')"></button>
+          <button style="background:#ff0" onclick="setAccent('#ff0')"></button>
+          <button style="background:#0f0" onclick="setAccent('#0f0')"></button>
         </div>
       </div>
     </div>
@@ -362,37 +277,22 @@
       </div>
     </div>
 
-     <div class="window" id="win-chrome">
-  
-       
-       <div class="window-header">
-      
-         <span>🌍 chrome</span>
-           
-      
-         <div class="window-controls"><button onclick="minimizeApp('chrome')">−</button><button onclick="closeApp('chrome')">×</button></div>
-     
+    <div class="window" id="win-chrome">
+      <div class="window-header">
+        <span>🌍 chrome</span>
+        <div class="window-controls"><button onclick="minimizeApp('chrome')">−</button><button onclick="closeApp('chrome')">×</button></div>
       </div>
-    
-              <div class="window-body">
-      
-                <div class="browser-launch">
-       
-      
+      <div class="window-body">
+        <div class="browser-launch">
           <div class="browser-icon">🌍</div>
-                
-               <p>open Google directly in a new tab</p>
-                 <a class="browser-link" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">open Google →</a>
+          <p>open Google directly in a new tab</p>
+          <a class="browser-link" href="https://www.google.com/" target="_blank" rel="noopener noreferrer">open Google →</a>
         </div>
-                
-              </div>
+      </div>
     </div>
 
- 
-  </div> 
-  
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
