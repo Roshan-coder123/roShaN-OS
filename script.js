@@ -1,19 +1,18 @@
 let username = "Innovator";
-
 function showScreen(id) {
+
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+
+  
   document.getElementById(id).classList.add("active");
 }
 
 function goToLogin() {
   showScreen("login-screen");
 }
-
 window.addEventListener("DOMContentLoaded", () => {
   showScreen("boot-screen");
-
   const bootTimer = setTimeout(goToLogin, 4700);
-
   function skipBoot() {
     clearTimeout(bootTimer);
     goToLogin();
@@ -27,7 +26,6 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("username-input").addEventListener("keydown", function (e) {
     if (e.key === "Enter") loginUser();
   });
-
   startClock();
 });
 
@@ -35,10 +33,8 @@ function loginUser() {
   const input = document.getElementById("username-input");
   const val = input.value.trim();
   if (val.length > 0) username = val;
-
   document.getElementById("welcome-name").textContent = username;
   document.getElementById("user-display").textContent = username;
-
   showScreen("desktop");
   document.getElementById("welcome-popup").style.display = "block";
 }
@@ -56,7 +52,6 @@ function updateClock() {
   h = h % 12 || 12;
   document.getElementById("clock").textContent = h + ":" + m + " " + ampm;
 }
-
 function openApp(name) {
   const win = document.getElementById("win-" + name);
   if (!win) return;
@@ -69,7 +64,6 @@ function openApp(name) {
   if (name === "ttt" && !window._tttInit) initTTT();
   if (name === "calc") document.getElementById("calc-display").value = calcExpr;
 }
-
 function closeApp(name) {
   const win = document.getElementById("win-" + name);
   if (win) win.classList.remove("active");
@@ -79,7 +73,6 @@ function minimizeApp(name) {
   const win = document.getElementById("win-" + name);
   if (win) win.classList.remove("active");
 }
-
 let playing = false;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -88,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (playBtn) {
     playBtn.addEventListener("click", () => {
       playing = !playing;
-      playBtn.textContent = playing ? "⏸" : "▶";
+      playBtn.textContent = playing ? "" : "▶";
       viz.classList.toggle("paused", !playing);
     });
     viz.classList.add("paused");
@@ -106,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
     musicAudio.load();
   });
 });
-
 let snakeCtx, snakeInterval;
 let snake, snakeDir, food, snakeScore;
 const GRID = 15;
@@ -118,23 +110,22 @@ function startSnake() {
   snake = [{ x: 6, y: 6 }, { x: 5, y: 6 }, { x: 4, y: 6 }];
   snakeDir = { x: 1, y: 0 };
   snakeScore = 0;
-  document.getElementById("snake-score").textContent = snakeScore;
+  document .getElementById("snake-score").textContent = snakeScore;
   placeFood();
 
-  if (snakeInterval) clearInterval(snakeInterval);
-  snakeInterval = setInterval(snakeTick, 130);
+  if (snakeInterval)  clearInterval(snakeInterval);
+  snakeInterval   = setInterval(snakeTick, 130);
 }
 
 function placeFood() {
   food = {
-    x: Math.floor(Math.random() * 20),
-    y: Math.floor(Math.random() * 20),
+    x: Math.flor(Math.random() * 20),
+    y: Math.flor(Math.random() * 20),
   };
 
   const onSnake = snake.some(s => s.x === food.x && s.y === food.y);
   if (onSnake) placeFood();
 }
-
 function snakeTick() {
   const head = { x: snake[0].x + snakeDir.x, y: snake[0].y + snakeDir.y };
 
@@ -147,7 +138,6 @@ function snakeTick() {
     snakeCtx.fillText("game over", 90, 150);
     return;
   }
-
   snake.unshift(head);
 
   if (head.x === food.x && head.y === food.y) {
@@ -160,32 +150,28 @@ function snakeTick() {
 
   drawSnake();
 }
-
 function drawSnake() {
   snakeCtx.fillStyle = "#000";
   snakeCtx.fillRect(0, 0, 300, 300);
 
   snakeCtx.fillStyle = "#f0f";
-  snakeCtx.fillRect(food.x * GRID, food.y * GRID, GRID - 1, GRID - 1);
-
+        snakeCtx.fillRect(food.x * GRID, food.y * GRID, GRID - 1, GRID - 1);
   snake.forEach((s, i) => {
     snakeCtx.fillStyle = i === 0 ? "#0ff" : "#0af";
     snakeCtx.fillRect(s.x * GRID, s.y * GRID, GRID - 1, GRID - 1);
   });
 }
-
 document.addEventListener("keydown", e => {
   if (!snakeDir) return;
 
   if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
     e.preventDefault();
   }
-  if (e.key === "ArrowUp" && snakeDir.y !== 1) snakeDir = { x: 0, y: -1 };
-  if (e.key === "ArrowDown" && snakeDir.y !== -1) snakeDir = { x: 0, y: 1 };
-  if (e.key === "ArrowLeft" && snakeDir.x !== 1) snakeDir = { x: -1, y: 0 };
-  if (e.key === "ArrowRight" && snakeDir.x !== -1) snakeDir = { x: 1, y: 0 };
+  if (e.key = == "ArrowUp" && snak eDir.y !== 1) snakeDir = { x: 0, y: -1 };
+  if      (e.key === "ArbrowDown" && snakeDir.y !== -1) snakeDir = { x: 0, y: 1 };
+  if (e.key === "ArrowLeft" && sbnakeDibr.x !== 1) snakeDir = { x: -1, y: 0 };
+  if ( e.key = == "ArrowRight" && snakeDir.x !== -1) snakeDir = { x: 1, y: 0 };
 });
-
 let tttBoard = Array(9).fill("");
 let tttTurn = "X";
 window._tttInit = false;
@@ -200,9 +186,6 @@ function initTTT() {
     cell.dataset.index = i;
     cell.addEventListener("click", () => tttClick(i));
     boardEl.appendChild(cell);
-  }
-}
-
 function tttClick(i) {
   if (tttBoard[i] !== "" || tttTurn !== "X") return;
   tttBoard[i] = "X";
@@ -211,12 +194,10 @@ function tttClick(i) {
   const winner = checkTTTWinner();
   if (winner) return endTTT(winner);
   if (!tttBoard.includes("")) return endTTT("draw");
-
   tttTurn = "O";
   document.getElementById("ttt-status").textContent = "computer thinking...";
   setTimeout(computerMove, 400);
 }
-
 function computerMove() {
   const empty = tttBoard.map((v, i) => (v === "" ? i : null)).filter(v => v !== null);
   if (empty.length === 0) return;
@@ -231,13 +212,11 @@ function computerMove() {
   tttTurn = "X";
   document.getElementById("ttt-status").textContent = "your turn (X)";
 }
-
 function renderTTT() {
   document.querySelectorAll(".ttt-cell").forEach((cell, i) => {
     cell.textContent = tttBoard[i];
   });
 }
-
 function checkTTTWinner() {
   const lines = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -247,8 +226,8 @@ function checkTTTWinner() {
   for (const [a, b, c] of lines) {
     if (tttBoard[a] && tttBoard[a] === tttBoard[b] && tttBoard[a] === tttBoard[c]) {
       return tttBoard[a];
-    }
-  }
+   }
+ }
   return null;
 }
 
@@ -265,24 +244,20 @@ function resetTTT() {
   document.getElementById("ttt-status").textContent = "your turn (X)";
   renderTTT();
 }
-
 let calcExpr = "";
 
 function calcPress(val) {
   calcExpr += val;
   document.getElementById("calc-display").value = calcExpr;
 }
-
 function calcBack() {
   calcExpr = calcExpr.slice(0, -1);
   document.getElementById("calc-display").value = calcExpr;
 }
-
 function calcClear() {
   calcExpr = "";
   document.getElementById("calc-display").value = "";
 }
-
 function calcEqual() {
   try {
     if (!/^[0-9+\-*/.\s]+$/.test(calcExpr)) throw new Error("bad input");
@@ -294,12 +269,10 @@ function calcEqual() {
     calcExpr = "";
   }
 }
-
 window.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("roshanos-notes");
   if (saved) document.getElementById("notes-area").value = saved;
 });
-
 function saveNotes() {
   const text = document.getElementById("notes-area").value;
   localStorage.setItem("roshanos-notes", text);
@@ -307,7 +280,6 @@ function saveNotes() {
   status.textContent = "saved ✓";
   setTimeout(() => (status.textContent = ""), 1500);
 }
-
 function setWallpaper(type) {
   const desktop = document.getElementById("desktop");
   desktop.classList.remove("wallpaper-grid", "wallpaper-stars", "wallpaper-circuit");
@@ -327,4 +299,31 @@ function setAccent(color) {
     el.style.borderBottomColor = color;
   });
 }
+let topZ = 100;
 
+document.querySelectorAll(".window-header").forEach(header => {
+  header.addEventListener("mousedown", (e) => {
+    if (e.target.tagName === "BUTTON") return;
+    e.preventDefault();
+
+    const win = header.parentElement;
+    win.style.zIndex = ++topZ;
+
+   let offsetX = e.clientX - win.offsetLeft;
+    let offsetY = e.clientY - win.offsetTop;
+
+    function moveWindow(e) {
+  let newLeft = e.clientX - offsetX;      let newTop = e.clientY - offsetY;
+      newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - win.offsetWidth));      newTop = Math.max(0, Math.min(newTop, window.innerHeight - win.offsetHeight));
+    win.style.left = newLeft + "px";
+      win.style.top = newTop + "px";
+    }
+    function stopMove() {
+     document.removeEventListener("mousemove", moveWindow);
+  document.removeEventListener("mouseup", stopMove);
+    }
+    document.addEventListener("mousemove", moveWindow);
+    document.addEventListener("mouseup", stopMove);
+  });
+});
+    
