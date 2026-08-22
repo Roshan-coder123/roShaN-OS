@@ -1,5 +1,3 @@
-// roShaN OS - main script
-// yes i know this file is getting long, i'll split it up eventually (probably not)
 
 let username = "Innovator";
 
@@ -81,12 +79,12 @@ function closeApp(name) {
 }
 
 function minimizeApp(name) {
-  // basically the same as close rn, might make this actually minimize to taskbar later
+  // 
   const win = document.getElementById("win-" + name);
   if (win) win.classList.remove("active");
 }
 
-// ---------- music player ----------
+
 let playing = false;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -114,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// ---------- snake ----------
+
 let snakeCtx, snakeInterval;
 let snake, snakeDir, food, snakeScore;
 const GRID = 15;
@@ -139,7 +137,7 @@ function placeFood() {
     y: Math.floor(Math.random() * 20),
   };
 
-  // just reroll if it lands on the snake, don't need anything fancier
+  
   const onSnake = snake.some(s => s.x === food.x && s.y === food.y);
   if (onSnake) placeFood();
 }
@@ -187,7 +185,7 @@ document.addEventListener("keydown", e => {
   if (!snakeDir) return;
 
   if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-    e.preventDefault(); // stop page from scrolling while playing
+    e.preventDefault(); 
   }
   if (e.key === "ArrowUp" && snakeDir.y !== 1) snakeDir = { x: 0, y: -1 };
   if (e.key === "ArrowDown" && snakeDir.y !== -1) snakeDir = { x: 0, y: 1 };
@@ -195,7 +193,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowRight" && snakeDir.x !== -1) snakeDir = { x: 1, y: 0 };
 });
 
-// ---------- tic tac toe ----------
+
 let tttBoard = Array(9).fill("");
 let tttTurn = "X";
 window._tttInit = false;
@@ -224,11 +222,11 @@ function tttClick(i) {
 
   tttTurn = "O";
   document.getElementById("ttt-status").textContent = "computer thinking...";
-  setTimeout(computerMove, 400); // small delay so it doesn't feel instant
+  setTimeout(computerMove, 400);
 }
 
 function computerMove() {
-  // just picks a random open spot, no minimax or anything smart. maybe later
+
   const empty = tttBoard.map((v, i) => (v === "" ? i : null)).filter(v => v !== null);
   if (empty.length === 0) return;
   const pick = empty[Math.floor(Math.random() * empty.length)];
@@ -267,8 +265,7 @@ function endTTT(result) {
   const status = document.getElementById("ttt-status");
   if (result === "draw") status.textContent = "it's a draw";
   else status.textContent = result === "X" ? "you win! 🎉" : "computer wins";
-  tttTurn = null; // locks the board, gotta hit reset to play again
-}
+  tttTurn = null; 
 
 function resetTTT() {
   tttBoard = Array(9).fill("");
@@ -277,7 +274,6 @@ function resetTTT() {
   renderTTT();
 }
 
-// ---------- calculator ----------
 let calcExpr = "";
 
 function calcPress(val) {
