@@ -24,6 +24,6 @@ You can get some info about me in about Roshan section.
 
 You can save your sticky notes here.
 And 
-You can listen 11 different musical here without internet.
+You can listen 11 different musics here without internet.
 
 You can Customise roShaN OS according to to your need and choice by selecting colour theamnad changing background here.
