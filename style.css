@@ -12,7 +12,7 @@ body {
 .screen { display: none; width:100vw; height:100vh; }
 .screen.active { display: block; }
 
-/* ---- BOOT SCREEN ---- */
+
 #boot-screen {
   background: radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
   display: none;
@@ -76,7 +76,6 @@ body {
 .skip-hint { color: #555; font-size: 8px; animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
 
-/* ---- LOGIN SCREEN ---- */
 #login-screen {
   background: radial-gradient(circle, #0a0a2a, #000);
   display: none;
@@ -144,7 +143,7 @@ body {
   50% { transform: translateY(-30px) rotate(20deg); }
 }
 
-/* ---- DESKTOP ---- */
+
 #desktop {
   background: #050510;
   background-image:
@@ -154,7 +153,7 @@ body {
   height: 100vh;
 }
 
-/* wallpaper variants, toggled from settings */
+
 #desktop.wallpaper-grid {
   background-image:
     linear-gradient(rgba(0,255,255,0.08) 1px, transparent 1px),
@@ -238,7 +237,7 @@ body {
 }
 .taskbar-info { display: flex; gap: 20px; font-size: 10px; color: #f0f; }
 
-/* windows */
+
 .window {
   display: none;
   position: absolute;
@@ -280,7 +279,7 @@ body {
 .window-body iframe { border: 1px solid #0ff; margin-bottom: 8px; }
 .window-body a { color: #f0f; }
 
-/* gallery */
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -296,7 +295,7 @@ body {
 }
 .hint { color: #666; font-size: 8px; }
 
-/* music */
+
 .music-display { text-align: center; }
 .track-name { margin-bottom: 15px; color: #0f0; }
 .music-controls { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
@@ -323,11 +322,10 @@ body {
 @keyframes bounce { 0%,100% { transform: scaleY(0.3); } 50% { transform: scaleY(1); } }
 .visualizer.paused span { animation-play-state: paused; }
 
-/* snake */
+
 #snake-canvas { background: #000; border: 1px solid #0ff; display: block; margin: 0 auto 10px; }
 #win-snake button { background: #0ff; border: none; color: #000; padding: 8px 14px; font-family: inherit; font-size: 9px; cursor: pointer; margin-top: 8px; }
 
-/* tic tac toe */
 #ttt-board {
   display: grid;
   grid-template-columns: repeat(3, 60px);
@@ -348,7 +346,7 @@ body {
 .ttt-cell:hover { background: rgba(0,255,255,0.15); }
 #win-ttt button { background: #f0f; border: none; color: #000; padding: 8px 14px; font-family: inherit; font-size: 9px; cursor: pointer; }
 
-/* calculator */
+
 #calc-display {
   width: 100%;
   background: #000;
@@ -376,7 +374,6 @@ body {
 }
 .calc-buttons button:hover { background: #0ff; color: #000; }
 
-/* notes */
 #notes-area {
   width: 100%;
   height: 140px;
@@ -392,7 +389,7 @@ body {
 #win-notes button { background: #0ff; border: none; color: #000; padding: 8px 14px; font-family: inherit; font-size: 9px; cursor: pointer; }
 #notes-status { margin-left: 10px; color: #0f0; font-size: 9px; }
 
-/* settings */
+
 .wallpaper-options, .color-options { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
 .wallpaper-options button {
   background: transparent;
@@ -410,7 +407,7 @@ body {
   cursor: pointer;
 }
 
-/* mobile-ish shrink so it doesn't totally break on small screens */
+
 @media (max-width: 500px) {
   .window { left: 5vw; width: 90vw; top: 60px; }
   .desktop-icons { grid-template-columns: repeat(auto-fill, 70px); }
@@ -559,7 +556,6 @@ body {
   50% { transform: translateY(-30px) rotate(20deg); }
 }
 
-/* ===== desktop ===== */
 #desktop {
   background-color: #050510;
   background-image: url("default background.png");
