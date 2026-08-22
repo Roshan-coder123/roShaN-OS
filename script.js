@@ -1,9 +1,8 @@
-// roShaN OS - script.js
-// handles boot sequence, login, window management, and all the little apps
+// roShaN OS - main script
+// yes i know this file is getting long, i'll split it up eventually (probably not)
 
 let username = "Innovator";
 
-// ---------- SCREEN SWITCHING ----------
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
@@ -13,24 +12,23 @@ function goToLogin() {
   showScreen("login-screen");
 }
 
-// boot screen -> login screen after the progress bar finishes, or on click/keypress
 window.addEventListener("DOMContentLoaded", () => {
   showScreen("boot-screen");
 
+  // boot screen sits for like 4.7s then auto goes to login
   const bootTimer = setTimeout(goToLogin, 4700);
 
-  const skipBoot = () => {
+  function skipBoot() {
     clearTimeout(bootTimer);
     goToLogin();
     document.removeEventListener("keydown", skipBoot);
     document.getElementById("boot-screen").removeEventListener("click", skipBoot);
-  };
+  }
   document.addEventListener("keydown", skipBoot);
   document.getElementById("boot-screen").addEventListener("click", skipBoot);
 
-  // login
   document.getElementById("login-btn").addEventListener("click", loginUser);
-  document.getElementById("username-input").addEventListener("keydown", e => {
+  document.getElementById("username-input").addEventListener("keydown", function (e) {
     if (e.key === "Enter") loginUser();
   });
 
@@ -49,32 +47,30 @@ function loginUser() {
   document.getElementById("welcome-popup").style.display = "block";
 }
 
-// ---------- CLOCK ----------
 function startClock() {
   updateClock();
-  setInterval(updateClock, 1000 * 30); // don't need it to the second, half-minute is fine
+  setInterval(updateClock, 30000); // every 30s is enough, no need to update every second
 }
+
 function updateClock() {
   const now = new Date();
   let h = now.getHours();
   const m = now.getMinutes().toString().padStart(2, "0");
   const ampm = h >= 12 ? "PM" : "AM";
   h = h % 12 || 12;
-  document.getElementById("clock").textContent = `${h}:${m} ${ampm}`;
+  document.getElementById("clock").textContent = h + ":" + m + " " + ampm;
 }
 
-// ---------- WINDOW MANAGEMENT ----------
 function openApp(name) {
   const win = document.getElementById("win-" + name);
   if (!win) return;
   win.classList.add("active");
 
-  // little offset so windows don't all stack exactly on top of each other
+  // stagger new windows a bit so they don't stack exactly on top of each other
   const openCount = document.querySelectorAll(".window.active").length;
-  win.style.top = (70 + openCount * 20) + "px";
-  win.style.left = (60 + openCount * 20) + "px";
+  win.style.top = 70 + openCount * 20 + "px";
+  win.style.left = 60 + openCount * 20 + "px";
 
-  // lazy-init stuff that needs the DOM to exist first
   if (name === "ttt" && !window._tttInit) initTTT();
   if (name === "calc") document.getElementById("calc-display").value = calcExpr;
 }
@@ -84,8 +80,15 @@ function closeApp(name) {
   if (win) win.classList.remove("active");
 }
 
-// ---------- MUSIC PLAYER (fake, just toggles the visualizer) ----------
+function minimizeApp(name) {
+  // basically the same as close rn, might make this actually minimize to taskbar later
+  const win = document.getElementById("win-" + name);
+  if (win) win.classList.remove("active");
+}
+
+// ---------- music player ----------
 let playing = false;
+
 document.addEventListener("DOMContentLoaded", () => {
   const playBtn = document.getElementById("play-btn");
   const viz = document.querySelector(".visualizer");
@@ -95,14 +98,26 @@ document.addEventListener("DOMContentLoaded", () => {
       playBtn.textContent = playing ? "⏸" : "▶";
       viz.classList.toggle("paused", !playing);
     });
-    viz.classList.add("paused"); // start paused
+    viz.classList.add("paused");
   }
 });
 
-// ---------- SNAKE ----------
+document.addEventListener("DOMContentLoaded", () => {
+  const musicSelect = document.getElementById("music-select");
+  const musicAudio = document.getElementById("music-audio");
+  if (!musicSelect || !musicAudio) return;
+
+  musicSelect.addEventListener("change", () => {
+    musicAudio.pause();
+    musicAudio.src = musicSelect.value;
+    musicAudio.load();
+  });
+});
+
+// ---------- snake ----------
 let snakeCtx, snakeInterval;
 let snake, snakeDir, food, snakeScore;
-const GRID = 15; // size of each cell in px, canvas is 300x300 -> 20x20 grid
+const GRID = 15;
 
 function startSnake() {
   const canvas = document.getElementById("snake-canvas");
@@ -121,9 +136,10 @@ function startSnake() {
 function placeFood() {
   food = {
     x: Math.floor(Math.random() * 20),
-    y: Math.floor(Math.random() * 20)
+    y: Math.floor(Math.random() * 20),
   };
-  // make sure food doesn't land on the snake
+
+  // just reroll if it lands on the snake, don't need anything fancier
   const onSnake = snake.some(s => s.x === food.x && s.y === food.y);
   if (onSnake) placeFood();
 }
@@ -131,7 +147,6 @@ function placeFood() {
 function snakeTick() {
   const head = { x: snake[0].x + snakeDir.x, y: snake[0].y + snakeDir.y };
 
-  // wall or self collision = game over
   const hitWall = head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20;
   const hitSelf = snake.some(s => s.x === head.x && s.y === head.y);
   if (hitWall || hitSelf) {
@@ -170,9 +185,9 @@ function drawSnake() {
 
 document.addEventListener("keydown", e => {
   if (!snakeDir) return;
-  // stop the browser from scrolling the page when playing
+
   if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-    e.preventDefault();
+    e.preventDefault(); // stop page from scrolling while playing
   }
   if (e.key === "ArrowUp" && snakeDir.y !== 1) snakeDir = { x: 0, y: -1 };
   if (e.key === "ArrowDown" && snakeDir.y !== -1) snakeDir = { x: 0, y: 1 };
@@ -180,7 +195,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowRight" && snakeDir.x !== -1) snakeDir = { x: 1, y: 0 };
 });
 
-// ---------- TIC TAC TOE ----------
+// ---------- tic tac toe ----------
 let tttBoard = Array(9).fill("");
 let tttTurn = "X";
 window._tttInit = false;
@@ -209,11 +224,12 @@ function tttClick(i) {
 
   tttTurn = "O";
   document.getElementById("ttt-status").textContent = "computer thinking...";
-  setTimeout(computerMove, 400);
+  setTimeout(computerMove, 400); // small delay so it doesn't feel instant
 }
 
 function computerMove() {
-  const empty = tttBoard.map((v, i) => v === "" ? i : null).filter(v => v !== null);
+  // just picks a random open spot, no minimax or anything smart. maybe later
+  const empty = tttBoard.map((v, i) => (v === "" ? i : null)).filter(v => v !== null);
   if (empty.length === 0) return;
   const pick = empty[Math.floor(Math.random() * empty.length)];
   tttBoard[pick] = "O";
@@ -235,11 +251,11 @@ function renderTTT() {
 
 function checkTTTWinner() {
   const lines = [
-    [0,1,2],[3,4,5],[6,7,8],
-    [0,3,6],[1,4,7],[2,5,8],
-    [0,4,8],[2,4,6]
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6],
   ];
-  for (const [a,b,c] of lines) {
+  for (const [a, b, c] of lines) {
     if (tttBoard[a] && tttBoard[a] === tttBoard[b] && tttBoard[a] === tttBoard[c]) {
       return tttBoard[a];
     }
@@ -251,7 +267,7 @@ function endTTT(result) {
   const status = document.getElementById("ttt-status");
   if (result === "draw") status.textContent = "it's a draw";
   else status.textContent = result === "X" ? "you win! 🎉" : "computer wins";
-  tttTurn = null; // lock the board
+  tttTurn = null; // locks the board, gotta hit reset to play again
 }
 
 function resetTTT() {
@@ -261,7 +277,7 @@ function resetTTT() {
   renderTTT();
 }
 
-// ---------- CALCULATOR ----------
+// ---------- calculator ----------
 let calcExpr = "";
 
 function calcPress(val) {
@@ -281,9 +297,9 @@ function calcClear() {
 
 function calcEqual() {
   try {
-    // only allow digits, operators, and dots - no funny business
+    // only allow numbers and basic operators, don't want random JS getting eval'd
     if (!/^[0-9+\-*/.\s]+$/.test(calcExpr)) throw new Error("bad input");
-    const result = Function('"use strict"; return (' + calcExpr + ')')();
+    const result = Function('"use strict"; return (' + calcExpr + ")")();
     calcExpr = String(result);
     document.getElementById("calc-display").value = calcExpr;
   } catch (err) {
@@ -292,7 +308,7 @@ function calcEqual() {
   }
 }
 
-// ---------- STICKY NOTES ----------
+// ---------- sticky notes ----------
 window.addEventListener("DOMContentLoaded", () => {
   const saved = localStorage.getItem("roshanos-notes");
   if (saved) document.getElementById("notes-area").value = saved;
@@ -303,10 +319,10 @@ function saveNotes() {
   localStorage.setItem("roshanos-notes", text);
   const status = document.getElementById("notes-status");
   status.textContent = "saved ✓";
-  setTimeout(() => status.textContent = "", 1500);
+  setTimeout(() => (status.textContent = ""), 1500);
 }
 
-// ---------- SETTINGS ----------
+// ---------- settings ----------
 function setWallpaper(type) {
   const desktop = document.getElementById("desktop");
   desktop.classList.remove("wallpaper-grid", "wallpaper-stars", "wallpaper-circuit");
@@ -314,14 +330,13 @@ function setWallpaper(type) {
 }
 
 function setAccent(color) {
-  // swap out the main glow colors across the OS
   document.querySelectorAll(".os-title, #clock").forEach(el => {
     el.style.color = color;
-    el.style.textShadow = `0 0 10px ${color}`;
+    el.style.textShadow = "0 0 10px " + color;
   });
   document.querySelectorAll(".window").forEach(el => {
     el.style.borderColor = color;
-    el.style.boxShadow = `0 0 25px ${color}`;
+    el.style.boxShadow = "0 0 25px " + color;
   });
   document.querySelectorAll(".window-header").forEach(el => {
     el.style.borderBottomColor = color;
