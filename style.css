@@ -1,18 +1,37 @@
+/* ==========================================================================
+   Steampunk / Cyberpunk Retro OS - Stylesheet
+   Author: Alex / Dev Team
+   Note: Custom pixel font loaded via Google Fonts in index.html
+   ========================================================================== */
+
+/* --- Reset & Core Setup --- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Press Start 2P', monospace;
-  background: #000;
-  color: #0ff;
-  overflow: hidden;
-  height: 100vh;
-  font-size: 12px;
+:root {
+  /* Theme Palette */
+  --neon-cyan: #0ff;
+  --neon-pink: #f0f;
+  --neon-yellow: #ff0;
+  --neon-green: #0f0;
+  --bg-dark: #000;
+  --panel-bg: rgba(0, 20, 40, 0.9);
 }
 
+body {
+  font-family: 'Press Start 2P', monospace, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--neon-cyan);
+  height: 100vh;
+  font-size: 12px;
+  overflow: hidden; /* Lock scrollbar for desktop layout */
+  user-select: none;
+}
+
+/* --- App View Layouts --- */
 .screen {
   display: none;
   width: 100vw;
@@ -23,11 +42,14 @@ body {
   display: block;
 }
 
+/* ==========================================================================
+   1. Boot Screen
+   ========================================================================== */
 #boot-screen {
   display: none;
+  height: 100vh;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background: radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
   cursor: pointer;
 }
@@ -40,6 +62,7 @@ body {
   text-align: center;
 }
 
+/* Gears Animation */
 .gears {
   display: flex;
   justify-content: center;
@@ -49,98 +72,70 @@ body {
 }
 
 .gear {
-  color: #0ff;
-  text-shadow: 0 0 15px #0ff;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 15px var(--neon-cyan);
   animation: spin 3s linear infinite;
 }
 
 .gear-2 {
-  color: #f0f;
-  text-shadow: 0 0 15px #f0f;
+  color: var(--neon-pink);
+  text-shadow: 0 0 15px var(--neon-pink);
   animation: spin-reverse 2s linear infinite;
 }
 
 .gear-3 {
-  color: #ff0;
-  text-shadow: 0 0 15px #ff0;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 15px var(--neon-yellow);
   animation: spin 4s linear infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spin-reverse {
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
+/* Lightbulb & Flicker */
 .lightbulb {
-  margin-bottom: 20px;
   font-size: 50px;
+  margin-bottom: 20px;
   animation: flicker 1.5s infinite;
 }
 
-@keyframes flicker {
-  0%, 100% {
-    opacity: 1;
-    text-shadow: 0 0 30px #ff0;
-  }
-
-  50% {
-    opacity: 0.3;
-    text-shadow: 0 0 5px #ff0;
-  }
-}
-
 .os-title {
-  margin-bottom: 10px;
-  color: #0ff;
   font-size: 32px;
-  text-shadow: 0 0 20px #0ff;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px var(--neon-cyan);
+  margin-bottom: 10px;
 }
 
 .os-tagline {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink);
   margin-bottom: 5px;
-  color: #f0f;
-  text-shadow: 0 0 10px #f0f;
 }
 
 .version {
-  margin-bottom: 30px;
   color: #666;
   font-size: 10px;
+  margin-bottom: 30px;
 }
 
+/* Loading Bar */
 .progress-bar {
   width: 300px;
   height: 15px;
   margin: 0 auto 15px;
-  border: 2px solid #0ff;
-  box-shadow: 0 0 10px #0ff;
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan);
 }
 
 .progress-fill {
-  width: 0;
+  width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #0ff, #f0f);
-  box-shadow: 0 0 10px #f0f;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+  box-shadow: 0 0 10px var(--neon-pink);
   animation: fill 4.5s linear forwards;
 }
 
-@keyframes fill {
-  to {
-    width: 100%;
-  }
-}
-
 .boot-status {
-  margin-bottom: 10px;
-  color: #0f0;
+  color: var(--neon-green);
   font-size: 10px;
+  margin-bottom: 10px;
 }
 
 .skip-hint {
@@ -149,22 +144,15 @@ body {
   animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.4;
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
+/* ==========================================================================
+   2. Login Screen
+   ========================================================================== */
 #login-screen {
   display: none;
-  justify-content: center;
-  align-items: center;
   position: relative;
   height: 100vh;
+  justify-content: center;
+  align-items: center;
   background: radial-gradient(circle, #0a0a2a, #000);
 }
 
@@ -175,54 +163,57 @@ body {
 .login-box {
   z-index: 2;
   padding: 40px;
-  border: 2px solid #0ff;
-  background: rgba(0, 20, 40, 0.9);
-  box-shadow: 0 0 30px #0ff;
+  background: var(--panel-bg);
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 30px var(--neon-cyan);
   text-align: center;
 }
 
 .login-box h2 {
-  margin-bottom: 25px;
-  color: #0ff;
   font-size: 14px;
-  text-shadow: 0 0 10px #0ff;
+  color: var(--neon-cyan);
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px var(--neon-cyan);
 }
 
 #username-input {
   width: 280px;
-  margin-bottom: 20px;
   padding: 12px;
-  border: 2px solid #f0f;
-  outline: none;
+  margin-bottom: 20px;
   background: #000;
-  color: #0ff;
+  border: 2px solid var(--neon-pink);
+  color: var(--neon-cyan);
   font-family: inherit;
   font-size: 12px;
-  box-shadow: 0 0 10px #f0f;
+  outline: none;
+  box-shadow: 0 0 10px var(--neon-pink);
 }
 
+/* Shared retro button styling */
 #login-btn,
 .popup button,
 #win-snake button,
 #win-notes button {
-  border: none;
-  background: #0ff;
+  background: var(--neon-cyan);
   color: #000;
+  border: none;
   font-family: inherit;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 #login-btn {
   padding: 12px 30px;
   font-size: 12px;
-  box-shadow: 0 0 15px #0ff;
+  box-shadow: 0 0 15px var(--neon-cyan);
 }
 
 #login-btn:hover {
-  background: #f0f;
-  box-shadow: 0 0 20px #f0f;
+  background: var(--neon-pink);
+  box-shadow: 0 0 20px var(--neon-pink);
 }
 
+/* Floating background gadgets */
 .floating-gadgets {
   position: absolute;
   inset: 0;
@@ -231,8 +222,8 @@ body {
 
 .floating-gadgets span {
   position: absolute;
-  opacity: 0.4;
   font-size: 30px;
+  opacity: 0.4;
   animation: float 6s infinite ease-in-out;
 }
 
@@ -245,64 +236,110 @@ body {
 .floating-gadgets span:nth-child(7) { top: 35%; left: 50%; animation-delay: 0.5s; }
 .floating-gadgets span:nth-child(8) { bottom: 5%; left: 50%; animation-delay: 3.5s; }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0);
-  }
-
-  50% {
-    transform: translateY(-30px) rotate(20deg);
-  }
-}
-
+/* ==========================================================================
+   3. Main Desktop Area
+   ========================================================================== */
 #desktop {
   position: relative;
   height: 100vh;
   background-color: #050510;
-  background-image: url("default%20background.png");
-  background-position: center;
+  background-image: url("default background.png");
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
-#desktop.wallpaper-grid {
-  background-image: url("grid%20background.png");
+/* Wallpaper Variants */
+#desktop.wallpaper-grid { background-image: url("grid background.png"); }
+#desktop.wallpaper-stars { background-image: url("star background.jpg"); }
+#desktop.wallpaper-circuit { background-image: url("circuit background.jpg"); }
+
+/* Desktop Grid Icons */
+.desktop-icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 90px);
+  gap: 15px;
+  padding: 25px;
 }
 
-#desktop.wallpaper-stars {
-  background-image: url("star%20background.jpg");
+.icon {
+  padding: 8px;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-#desktop.wallpaper-circuit {
-  background-image: url("circuit%20background.jpg");
+.icon:hover {
+  background: rgba(0, 255, 255, 0.1);
 }
 
+.icon-img {
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.icon p {
+  font-size: 8px;
+  color: var(--neon-cyan);
+  overflow-wrap: break-word;
+}
+
+/* Bottom Taskbar */
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  padding: 0 15px;
+  background: rgba(0, 10, 20, 0.95);
+  border-top: 2px solid var(--neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.start-btn {
+  color: var(--neon-cyan);
+  font-size: 10px;
+  text-shadow: 0 0 8px var(--neon-cyan);
+  cursor: pointer;
+}
+
+.taskbar-info {
+  display: flex;
+  gap: 20px;
+  color: var(--neon-pink);
+  font-size: 10px;
+}
+
+/* Popups & Notifications */
 .popup {
   position: absolute;
   top: 40%;
   left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 999;
   width: max-content;
   max-width: 320px;
   padding: 25px 30px;
-  transform: translate(-50%, -50%);
-  border: 2px solid #0ff;
   background: rgba(0, 20, 40, 0.95);
-  box-shadow: 0 0 25px #0ff;
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 0 0 25px var(--neon-cyan);
   text-align: center;
 }
 
 .popup h3 {
-  margin-bottom: 12px;
-  color: #0ff;
   font-size: 13px;
+  color: var(--neon-cyan);
+  margin-bottom: 12px;
 }
 
 .popup p {
-  margin-bottom: 15px;
-  color: #ccc;
   font-size: 10px;
+  color: #ccc;
   line-height: 1.6;
+  margin-bottom: 15px;
 }
 
 .popup button {
@@ -313,66 +350,12 @@ body {
 .popup button:hover,
 #win-snake button:hover,
 #win-notes button:hover {
-  background: #f0f;
+  background: var(--neon-pink);
 }
 
-.desktop-icons {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 90px);
-  gap: 15px;
-  padding: 25px;
-}
-
-.icon {
-  padding: 8px;
-  border-radius: 4px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.icon:hover {
-  background: rgba(0, 255, 255, 0.1);
-}
-
-.icon-img {
-  margin-bottom: 5px;
-  font-size: 32px;
-}
-
-.icon p {
-  color: #0ff;
-  font-size: 8px;
-  overflow-wrap: break-word;
-}
-
-.taskbar {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 45px;
-  padding: 0 15px;
-  border-top: 2px solid #0ff;
-  background: rgba(0, 10, 20, 0.95);
-}
-
-.start-btn {
-  color: #0ff;
-  font-size: 10px;
-  cursor: pointer;
-  text-shadow: 0 0 8px #0ff;
-}
-
-.taskbar-info {
-  display: flex;
-  gap: 20px;
-  color: #f0f;
-  font-size: 10px;
-}
-
+/* ==========================================================================
+   4. Window Components & Utilities
+   ========================================================================== */
 .window {
   display: none;
   position: absolute;
@@ -381,8 +364,8 @@ body {
   z-index: 100;
   width: 420px;
   max-width: 90vw;
-  border: 2px solid #0ff;
   background: rgba(5, 10, 25, 0.97);
+  border: 2px solid var(--neon-cyan);
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
 }
 
@@ -392,11 +375,11 @@ body {
 
 .window-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 12px;
-  border-bottom: 2px solid #0ff;
   background: linear-gradient(90deg, #001a2a, #0a0028);
+  border-bottom: 2px solid var(--neon-cyan);
   font-size: 10px;
   cursor: grab;
   user-select: none;
@@ -414,53 +397,56 @@ body {
 
 .window-header button {
   padding: 2px 8px;
-  border: 1px solid #f0f;
   background: transparent;
-  color: #f0f;
+  border: 1px solid var(--neon-pink);
+  color: var(--neon-pink);
   font-family: inherit;
   cursor: pointer;
 }
 
 .window-header button:hover {
-  background: #f0f;
+  background: var(--neon-pink);
   color: #000;
 }
 
 .window-body {
-  max-height: 65vh;
   padding: 18px;
+  max-height: 65vh;
   overflow-y: auto;
   font-size: 10px;
   line-height: 1.7;
 }
 
 .window-body iframe {
+  border: 1px solid var(--neon-cyan);
   margin-bottom: 8px;
-  border: 1px solid #0ff;
 }
 
 .window-body a {
-  color: #f0f;
+  color: var(--neon-pink);
 }
 
+/* --- App Specific Views --- */
+
+/* Launchers (Browser / Gallery) */
 .browser-launch,
 .gallery-launch {
   padding: 28px 18px;
-  border: 1px solid #0ff;
   background: rgba(0, 255, 255, 0.06);
+  border: 1px solid var(--neon-cyan);
   text-align: center;
 }
 
 .browser-icon,
 .gallery-launch-icon {
-  margin-bottom: 14px;
   font-size: 42px;
+  margin-bottom: 14px;
 }
 
 .browser-launch p,
 .gallery-launch p {
-  margin-bottom: 18px;
   color: #ccc;
+  margin-bottom: 18px;
 }
 
 .browser-link,
@@ -468,7 +454,7 @@ body {
 .music-link {
   display: inline-block;
   padding: 11px 14px;
-  background: #0ff;
+  background: var(--neon-cyan);
   color: #000 !important;
   text-decoration: none;
 }
@@ -476,13 +462,14 @@ body {
 .browser-link:hover,
 .gallery-link:hover,
 .music-link:hover {
-  background: #f0f;
+  background: var(--neon-pink);
 }
 
 .gallery-link {
   box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
 }
 
+/* Photo Gallery Grid */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -492,8 +479,8 @@ body {
 
 .gallery-item {
   padding: 20px 0;
-  border: 1px solid #0ff;
   background: rgba(0, 255, 255, 0.08);
+  border: 1px solid var(--neon-cyan);
   font-size: 30px;
   text-align: center;
 }
@@ -503,29 +490,30 @@ body {
   font-size: 8px;
 }
 
+/* Music Player Module */
 .music-display {
   text-align: center;
 }
 
 .track-name {
+  color: var(--neon-green);
   margin-bottom: 15px;
-  color: #0f0;
 }
 
 .music-label {
   display: block;
-  margin-bottom: 8px;
-  color: #0ff;
   font-size: 9px;
+  color: var(--neon-cyan);
+  margin-bottom: 8px;
 }
 
 #music-select {
   width: 100%;
-  margin-bottom: 12px;
   padding: 9px;
-  border: 1px solid #0ff;
+  margin-bottom: 12px;
   background: #000;
-  color: #0ff;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
   font-family: inherit;
   font-size: 9px;
 }
@@ -535,11 +523,11 @@ body {
   width: 100%;
   height: 40px;
   margin-bottom: 12px;
-  border: 1px solid #0ff;
+  border: 1px solid var(--neon-cyan);
 }
 
 .music-link {
-  background: #f0f;
+  background: var(--neon-pink);
   cursor: pointer;
 }
 
@@ -552,29 +540,30 @@ body {
 
 .music-controls button {
   padding: 8px 12px;
-  border: 1px solid #0ff;
   background: transparent;
-  color: #0ff;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
   font-size: 14px;
   cursor: pointer;
 }
 
 .music-controls button:hover {
-  background: #0ff;
+  background: var(--neon-cyan);
   color: #000;
 }
 
+/* Equalizer Visualizer */
 .visualizer {
   display: flex;
-  align-items: flex-end;
   justify-content: center;
+  align-items: flex-end;
   gap: 4px;
   height: 40px;
 }
 
 .visualizer span {
   width: 6px;
-  background: #0ff;
+  background: var(--neon-cyan);
   animation: bounce 0.8s infinite ease-in-out;
 }
 
@@ -584,25 +573,16 @@ body {
 .visualizer span:nth-child(4) { height: 20px; animation-delay: 0.3s; }
 .visualizer span:nth-child(5) { height: 15px; animation-delay: 0.4s; }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: scaleY(0.3);
-  }
-
-  50% {
-    transform: scaleY(1);
-  }
-}
-
 .visualizer.paused span {
   animation-play-state: paused;
 }
 
+/* Games & Mini Apps */
 #snake-canvas {
   display: block;
   margin: 0 auto 10px;
-  border: 1px solid #0ff;
   background: #000;
+  border: 1px solid var(--neon-cyan);
 }
 
 #win-snake button,
@@ -624,10 +604,10 @@ body {
 
 .ttt-cell {
   display: flex;
-  align-items: center;
   justify-content: center;
-  border: 1px solid #0ff;
+  align-items: center;
   background: rgba(0, 255, 255, 0.05);
+  border: 1px solid var(--neon-cyan);
   font-size: 22px;
   cursor: pointer;
 }
@@ -638,16 +618,17 @@ body {
 
 #win-ttt button {
   margin-top: 0;
-  background: #f0f;
+  background: var(--neon-pink);
 }
 
+/* Calculator App */
 #calc-display {
   width: 100%;
-  margin-bottom: 8px;
   padding: 10px;
-  border: 1px solid #0ff;
+  margin-bottom: 8px;
   background: #000;
-  color: #0f0;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-green);
   font-family: inherit;
   font-size: 16px;
   text-align: right;
@@ -661,38 +642,40 @@ body {
 
 .calc-buttons button {
   padding: 12px 0;
-  border: 1px solid #0ff;
   background: rgba(0, 255, 255, 0.08);
-  color: #0ff;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
   font-family: inherit;
   font-size: 11px;
   cursor: pointer;
 }
 
 .calc-buttons button:hover {
-  background: #0ff;
+  background: var(--neon-cyan);
   color: #000;
 }
 
+/* Notes App */
 #notes-area {
   width: 100%;
   height: 140px;
-  margin-bottom: 8px;
   padding: 10px;
-  border: 1px solid #0ff;
+  margin-bottom: 8px;
   background: #000;
-  color: #0f0;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-green);
   font-family: inherit;
   font-size: 10px;
   resize: none;
 }
 
 #notes-status {
-  margin-left: 10px;
-  color: #0f0;
   font-size: 9px;
+  color: var(--neon-green);
+  margin-left: 10px;
 }
 
+/* Preferences & Customization Options */
 .wallpaper-options,
 .color-options {
   display: flex;
@@ -703,16 +686,16 @@ body {
 
 .wallpaper-options button {
   padding: 8px 10px;
-  border: 1px solid #0ff;
   background: transparent;
-  color: #0ff;
+  border: 1px solid var(--neon-cyan);
+  color: var(--neon-cyan);
   font-family: inherit;
   font-size: 8px;
   cursor: pointer;
 }
 
 .wallpaper-options button:hover {
-  background: #0ff;
+  background: var(--neon-cyan);
   color: #000;
 }
 
@@ -723,6 +706,50 @@ body {
   cursor: pointer;
 }
 
+/* ==========================================================================
+   5. Keyframes & Animations
+   ========================================================================== */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 30px var(--neon-yellow);
+  }
+  50% {
+    opacity: 0.3;
+    text-shadow: 0 0 5px var(--neon-yellow);
+  }
+}
+
+@keyframes fill {
+  to { width: 100%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(20deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+/* ==========================================================================
+   6. Mobile Responsiveness
+   ========================================================================== */
 @media (max-width: 500px) {
   .window {
     top: 60px;
